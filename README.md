@@ -2,8 +2,6 @@
 
 -----------
 
-![image-20221104143108846](C:\Users\Herz\AppData\Roaming\Typora\typora-user-images\image-20221104143108846.png)
-
 The semantic segmentation part consists of the improved Swin Transformer, and the edge detection part consists of convolutional layers and ESAB modules.The fusion part uses the method of graph convolution to fuse semantic features and edge features.
 
 #### DataSets
