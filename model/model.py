@@ -1,5 +1,5 @@
 import torch.nn
-from swin import *
+from swintransformer import *
 from fusion import *
 from edge import Edgenet, ESAM
 
