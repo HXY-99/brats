@@ -18,6 +18,8 @@ from PIL import Image, ImageOps
 from medpy.metric.binary import hd
 from scipy.ndimage import distance_transform_edt as eucl_distance
 
+import torch.distributed as dist
+
 
 colors = ["c", "r", "g", "b", "m", 'y', 'k', 'chartreuse', 'coral', 'gold', 'lavender',
           'silver', 'tan', 'teal', 'wheat', 'orchid', 'orange', 'tomato']
@@ -396,3 +398,10 @@ def center_pad(arr: np.ndarray, target_shape: Tuple[int, ...]) -> np.ndarray:
 
 def count_params(model):
     return sum(p.numel() for p in model.parameters() if p.requires_grad)
+
+
+def all_reduce_tensor(tensor, op=dist.ReduceOp.SUM, world_size=1):
+    tensor = tensor.clone()
+    dist.all_reduce(tensor, op)
+    tensor.div_(world_size)
+    return tensor
